@@ -5,7 +5,7 @@ function ImageLinkForm() {
     return(
         <div>
             <p className='f3 fw5 white'>
-                This magic app will detect faces in your pictures. Try it!
+                {'This magic app will detect faces in your pictures. Try it!'}
             </p>
             <div className='form center pa4 br3'>
                 <input className='f4 pa2 w-70' type='text'></input>
