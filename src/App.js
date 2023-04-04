@@ -10,7 +10,6 @@ function App() {
   return (
     <div className="App">
       <ParticlesBg type="cobweb" color="#f9fcfc" num={250} bg={true}/>
-      {/* ddddddd */}
       <Navigation />
       <Logo />
       <Rank />
