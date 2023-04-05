@@ -1,10 +1,7 @@
 import React from 'react';
 import './ImageLinkForm.css'
 
-function ImageLinkForm({onInputChange}) {
-    const onButtonClick = () => {
-        console.log("clicked")
-    }
+function ImageLinkForm({onInputChange, onButtonClick}) {
     return(
         <div>
             <p className='f3 fw5 white'>
