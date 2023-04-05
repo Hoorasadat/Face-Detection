@@ -5,6 +5,7 @@ import Navigation from './components/navigation/Navigation';
 import Logo from './components/logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
+import FaceRecognition from './components/FaceRecognition/FaceRecognition'
 
 function App() {
   const [url, setUrl] = useState("");
@@ -47,7 +48,6 @@ function App() {
     return requestOptions
   }
 
-
   const onButtonClick = () => {
     const MODEL_ID = 'face-detection';
     const MODEL_VERSION_ID = '6dc7e46bc9124c5c8824be4822abe105';
@@ -61,7 +61,6 @@ function App() {
       .catch(error => console.log('error', error));
   }
 
-
   return (
     <div className="App">
       <ParticlesBg type="cobweb" color="#f9fcfc" num={250} bg={true}/>
@@ -69,7 +68,7 @@ function App() {
       <Logo />
       <Rank />
       <ImageLinkForm onInputChange = {onInputChange} onButtonClick = {onButtonClick}/>
-      {/* <FaceRecognition /> */}
+      <FaceRecognition image = {url}/>
 
     </div>
   );
