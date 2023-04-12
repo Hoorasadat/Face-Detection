@@ -5,7 +5,7 @@ import Brain from './brain.png'
 
 function Logo() {
     return (
-       <div className='ma4 mt0'>
+       <div className='ma4'>
          <Tilt className='Tilt'>
             <div className='Tilt-inner'>
                 <img src={Brain} alt='Brain'></img>
