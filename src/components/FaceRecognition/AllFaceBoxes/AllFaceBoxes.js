@@ -2,7 +2,7 @@
 import React from 'react';
 import './AllFaceBoxes.css';
 
-function AllFaceBoxes({boxes}) {
+function AllFaceBoxes({boxes, image}) {
     const boxesDiv = [];
     boxes.forEach(item => {
         boxesDiv.push(
@@ -13,9 +13,16 @@ function AllFaceBoxes({boxes}) {
             </div>
         )
     });
-    return(
-        <div>{ boxesDiv }</div>
-    )
+
+    if(Object.keys(boxes[0]).length !== 0){
+        return <div>{ boxesDiv }</div>
+    } else if (image !== ''){
+        return(
+            <p className='f5 fw5 yellow'>
+                If you don't see the face detection, your image url either does not contain a face or is more than <strong>2000</strong> characters.
+            </p>
+        )
+    }
 }
 
 export default AllFaceBoxes;

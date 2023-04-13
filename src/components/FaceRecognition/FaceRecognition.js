@@ -7,7 +7,7 @@ function FaceRecognition({boxes, image}) {
         <div className='center ma'>
             <div className='absolute mt2'>
                 <img id='image' src={image} alt='' width='500px' height='auto'/>
-                <AllFaceBoxes boxes={boxes}/>
+                <AllFaceBoxes boxes={boxes} image={image}/>
             </div>
         </div>
     )

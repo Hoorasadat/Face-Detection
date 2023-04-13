@@ -48,6 +48,7 @@ function App() {
   }
 
   const onButtonClick = () => {
+    setBoxes([{}]);
     setImageUrl(urlInput);
 
     const MODEL_ID = 'face-detection';
@@ -94,7 +95,6 @@ function App() {
       <Logo />
       <ImageLinkForm onInputChange = {onInputChange} onButtonClick = {onButtonClick}/>
       <FaceRecognition boxes={boxes} image = {imageUrl}/>
-
     </div>
   );
 }
