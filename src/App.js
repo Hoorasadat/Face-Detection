@@ -8,7 +8,7 @@ import FaceRecognition from './components/FaceRecognition/FaceRecognition'
 function App() {
   const [urlInput, setUrlInput] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [box, setBox] = useState({});
+  const [boxes, setBoxes] = useState([{}]);
 
   const onInputChange = (event) => {
     setUrlInput(event.target.value);
@@ -58,7 +58,7 @@ function App() {
     // this will default to the latest version_id
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", setupRequestOptions())
       .then(response => response.json())
-      .then(result => displayBox(calculateFaceLocation(result)))
+      .then(result => displayBoxes(calculateFaceLocation(result)))
       .catch(error => console.log('error', error));
   }
 
@@ -66,21 +66,26 @@ function App() {
     const image = document.getElementById('image');
     const height = Number(image.height);
     const width = Number(image.width);
-    const boxLocation = clarifiData.outputs[0].data.regions[0].region_info.bounding_box;
-    const leftCol = width * boxLocation.left_col;
-    const topRow = height * boxLocation.top_row;
-    const rightCol = width - (width * boxLocation.right_col);
-    const bottomRow = height - (height * boxLocation.bottom_row);
-    return {
-      leftCol,
-      topRow,
-      rightCol,
-      bottomRow,
-    }
+    const boxesDimentions = clarifiData.outputs[0].data.regions;
+    const arrayOfBoxes = [];
+    boxesDimentions.forEach(item => {
+      const boxLocation = item.region_info.bounding_box;
+      const leftCol = width * boxLocation.left_col;
+      const topRow = height * boxLocation.top_row;
+      const rightCol = width - (width * boxLocation.right_col);
+      const bottomRow = height - (height * boxLocation.bottom_row);
+      arrayOfBoxes.push({
+        leftCol,
+        topRow,
+        rightCol,
+        bottomRow,
+      })
+    });
+    return arrayOfBoxes;
   }
 
-  const displayBox = (dimentions) => {
-    setBox(dimentions);
+  const displayBoxes = (dimentions) => {
+    setBoxes(dimentions);
   }
 
   return (
@@ -88,7 +93,7 @@ function App() {
       <ParticlesBg type="cobweb" color="#f9fcfc" num={250} bg={true}/>
       <Logo />
       <ImageLinkForm onInputChange = {onInputChange} onButtonClick = {onButtonClick}/>
-      <FaceRecognition faceBox={box} image = {imageUrl}/>
+      <FaceRecognition boxes={boxes} image = {imageUrl}/>
 
     </div>
   );
